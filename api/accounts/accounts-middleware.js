@@ -39,10 +39,19 @@ exports.checkAccountPayload = (req, res, next) => {
 }
 
 exports.checkAccountNameUnique = (req, res, next) => {
+  const name = req.body.name.trim();
   getAll()
-    .then(obj => {
-      console.log("In checkAccountNameUnique: ", obj);
-      next();
+    .then(accounts => {
+      console.log("In checkAccountNameUnique: ", accounts);
+      const names = new Set(accounts.map(account => account.name));
+      if (names.has(name)) {
+        res.status(400).json({
+          message: 'that name is taken'
+	});
+      } else {
+        req.body.name = name;
+        next();
+      }
     })
     .catch(next);
 }
