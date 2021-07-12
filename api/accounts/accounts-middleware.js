@@ -36,14 +36,15 @@ exports.checkAccountPayload = (req, res, next) => {
       }
     }
   }
-  console.log('checkAccountPayload wired');
-  next();
 }
 
 exports.checkAccountNameUnique = (req, res, next) => {
-  // DO YOUR MAGIC
-  console.log('checkAccountNameUnique wired');
-  next();
+  getAll()
+    .then(obj => {
+      console.log("In checkAccountNameUnique: ", obj);
+      next();
+    })
+    .catch(next);
 }
 
 exports.checkAccountId = (req, res, next) => {
