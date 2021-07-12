@@ -14,13 +14,18 @@ const create = async account => {
 };
 
 const updateById = async (id, account) => {
-  // DO YOUR MAGIC
-  return 'updateById wired';
+  // UPDATE accounts SET name = newName, budget = newBudget WHERE id = argId;
+  await db('accounts')
+    .where({id})
+    .update(account);
+  return await getById(id); // cant use req.account here to make less db calls;
 };
 
 const deleteById = async id => {
-  // DO YOUR MAGIC
-  return 'deleteById wired';
+  // DELETE FROM accounts WHERE id = argID;
+  return await db('accounts')
+    .where({id})
+    .del();
 };
 
 module.exports = {
