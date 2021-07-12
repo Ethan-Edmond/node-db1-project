@@ -37,9 +37,11 @@ router.put('/:id', checkAccountId, checkAccountPayload, (req, res, next) => {
 
 router.delete('/:id', checkAccountId, (req, res, next) => {
   Accounts.deleteById(req.params.id)
-    .then(console.log)
+    .then(deleted => {
+      res.json(deleted);
+      // res.json(req.account); //this uses less db calls
+    })
     .catch(next);
-  res.json({res: 'res'});
 });
 
 router.use((err, req, res, next) => { // eslint-disable-line
