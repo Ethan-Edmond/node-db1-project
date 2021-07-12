@@ -17,9 +17,10 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', checkAccountId, (req, res, next) => {
   Accounts.getById(req.params.id)
-    .then(console.log)
+    .then(account => {
+      res.json(account);
+    })
     .catch(next);
-  res.json({res: 'res'});
 });
 
 router.post('/', checkAccountPayload, checkAccountNameUnique, (req, res, next) => {
