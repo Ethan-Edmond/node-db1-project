@@ -5,24 +5,23 @@ const getAll = async () => {
 };
 
 const getById = async id => {
-  // DO YOUR MAGIC
-  return 'getById wired';
-}
+  return await db('accounts').where({id}).first();
+};
 
 const create = async account => {
   // DO YOUR MAGIC
   return 'create wired';
-}
+};
 
 const updateById = async (id, account) => {
   // DO YOUR MAGIC
   return 'updateById wired';
-}
+};
 
 const deleteById = async id => {
   // DO YOUR MAGIC
   return 'deleteById wired';
-}
+};
 
 module.exports = {
   getAll,
@@ -30,4 +29,4 @@ module.exports = {
   create,
   updateById,
   deleteById,
-}
+};
