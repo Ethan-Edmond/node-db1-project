@@ -1,4 +1,4 @@
-const router = require('express').Router()
+const router = require('express').Router();
 const {
   checkAccountPayload,
   checkAccountNameUnique,
@@ -9,9 +9,10 @@ const Accounts = require('./accounts-model');
 // getAll, getById, create, updateById, deleteById 
 router.get('/', (req, res, next) => {
   Accounts.getAll()
-    .then(console.log)
+    .then(accounts => {
+      res.json(accounts);
+    })
     .catch(next);
-  res.json({res: 'res'});
 });
 
 router.get('/:id', checkAccountId, (req, res, next) => {

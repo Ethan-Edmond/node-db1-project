@@ -1,7 +1,8 @@
+const db = require('../../data/db-config');
+
 const getAll = async () => {
-  // DO YOUR MAGIC
-  return 'getAll wired';
-}
+  return await db('accounts');
+};
 
 const getById = async id => {
   // DO YOUR MAGIC
