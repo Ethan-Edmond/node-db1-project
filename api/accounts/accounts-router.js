@@ -8,42 +8,45 @@ const Accounts = require('./accounts-model');
 
 // getAll, getById, create, updateById, deleteById 
 router.get('/', (req, res, next) => {
-  // DO YOUR MAGIC
   Accounts.getAll()
-    .then(console.log);
+    .then(console.log)
+    .catch(next);
   res.json({res: 'res'});
 });
 
 router.get('/:id', checkAccountId, (req, res, next) => {
-  // DO YOUR MAGIC
   Accounts.getById(req.params.id)
-    .then(console.log);
+    .then(console.log)
+    .catch(next);
   res.json({res: 'res'});
 });
 
 router.post('/', checkAccountPayload, checkAccountNameUnique, (req, res, next) => {
-  // DO YOUR MAGIC
   Accounts.create(req.body)
-    .then(console.log);
+    .then(console.log)
+    .catch(next);
   res.json({res: 'res'});
 });
 
 router.put('/:id', checkAccountId, checkAccountPayload, checkAccountNameUnique, (req, res, next) => {
-  // DO YOUR MAGIC
   Accounts.updateById(req.params.id, req.body)
-    .then(console.log);
+    .then(console.log)
+    .catch(next);
   res.json({res: 'res'});
 });
 
 router.delete('/:id', checkAccountId, (req, res, next) => {
-  // DO YOUR MAGIC
   Accounts.deleteById(req.params.id)
-    .then(console.log);
+    .then(console.log)
+    .catch(next);
   res.json({res: 'res'});
 });
 
 router.use((err, req, res, next) => { // eslint-disable-line
-  // DO YOUR MAGIC
+  res.status(500).json({
+    message: err.message,
+    stack: err.stack
+  });
 })
 
 module.exports = router;
