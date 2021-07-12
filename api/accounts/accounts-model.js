@@ -1,21 +1,26 @@
-const getAll = () => {
+const getAll = async () => {
   // DO YOUR MAGIC
+  return 'getAll wired';
 }
 
-const getById = id => {
+const getById = async id => {
   // DO YOUR MAGIC
+  return 'getById wired';
 }
 
-const create = account => {
+const create = async account => {
   // DO YOUR MAGIC
+  return 'create wired';
 }
 
-const updateById = (id, account) => {
+const updateById = async (id, account) => {
   // DO YOUR MAGIC
+  return 'updateById wired';
 }
 
-const deleteById = id => {
+const deleteById = async id => {
   // DO YOUR MAGIC
+  return 'deleteById wired';
 }
 
 module.exports = {
