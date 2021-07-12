@@ -25,12 +25,13 @@ router.get('/:id', checkAccountId, (req, res, next) => {
 
 router.post('/', checkAccountPayload, checkAccountNameUnique, (req, res, next) => {
   Accounts.create(req.body)
-    .then(console.log)
+    .then(account => {
+      res.status(201).json(account);
+    })
     .catch(next);
-  res.json({res: 'res'});
 });
 
-router.put('/:id', checkAccountId, checkAccountPayload, checkAccountNameUnique, (req, res, next) => {
+router.put('/:id', checkAccountId, checkAccountPayload, (req, res, next) => {
   Accounts.updateById(req.params.id, req.body)
     .then(console.log)
     .catch(next);
@@ -49,6 +50,6 @@ router.use((err, req, res, next) => { // eslint-disable-line
     message: err.message,
     stack: err.stack
   });
-})
+});
 
 module.exports = router;

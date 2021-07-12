@@ -9,8 +9,8 @@ const getById = async id => {
 };
 
 const create = async account => {
-  // DO YOUR MAGIC
-  return 'create wired';
+  const newId = await db('accounts').insert(account);
+  return await getById(newId);
 };
 
 const updateById = async (id, account) => {

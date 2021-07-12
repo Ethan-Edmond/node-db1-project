@@ -2,9 +2,9 @@ const {
   getAll, getById
 } = require('./accounts-model');
 
-// getAll, getById, create, updateById, deleteById
 exports.checkAccountPayload = (req, res, next) => {
   const {name, budget} = req.body;
+  req.body = {name, budget};
   if (name === undefined || budget === undefined) {
     res.status(400).json({
       message: 'name and budget are required'
@@ -23,38 +23,37 @@ exports.checkAccountPayload = (req, res, next) => {
         if (typeof budget !== 'number') {
           res.status(400).json({
             message: 'budget of account must be a number'
-	  });
-	} else {
+	        });
+	      } else {
           if (budget > 1000000 || budget < 0) {
             res.status(400).json({
               message: 'budget of account is too large or too small'
-	    });
-	  } else {
+	          });
+	        } else {
             next();
-	  }
-	}
+	        }
+	      }
       }
     }
   }
-}
+};
 
 exports.checkAccountNameUnique = (req, res, next) => {
   const name = req.body.name.trim();
   getAll()
     .then(accounts => {
-      console.log("In checkAccountNameUnique: ", accounts);
       const names = new Set(accounts.map(account => account.name));
       if (names.has(name)) {
         res.status(400).json({
           message: 'that name is taken'
-	});
+	      });
       } else {
         req.body.name = name;
         next();
       }
     })
     .catch(next);
-}
+};
 
 exports.checkAccountId = (req, res, next) => {
   getById(req.params.id)
@@ -62,11 +61,11 @@ exports.checkAccountId = (req, res, next) => {
       if (account === undefined) {
         res.status(404).json({
           message: 'account not found'
-	})
+	      });
       } else {
         req.account = account;
         next();
       }
     })
     .catch(next);
-}
+};
